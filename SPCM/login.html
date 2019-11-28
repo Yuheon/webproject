@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./css/page_style.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Signika:300,400,600,700&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script>
+        function func() {//when user click submit
+            var index = sessionStorage.getItem('index');//user num,Syntax for READING data from sessionStorage:
+            var check = 0;
+            var useri;
+            if (index) {
+                for (var i = 1; i <= index; i++) {
+                    var obj1 = sessionStorage.getItem('user' + i);//Syntax for READING data from sessionStorage:
+                    var obj = JSON.parse(obj1);//Parse the data with JSON.parse(), and the data becomes a JavaScript object.
+
+                    if (obj.id == document.getElementById('id').value) {//check id, pw
+                        if (obj.pw == document.getElementById('exampleInputPassword1').value) {
+                            check = 1;
+                            useri = obj.key;
+                            break;
+                        }
+                    }
+                }
+                if (check == 0) {//login fail
+                    alert("Login Failed!");
+                }
+                else {//login success
+                    window.parent.location.href = "main.html";
+                    sessionStorage.setItem('logininfo', useri);
+                    alert("Login Success!");
+                }
+            }
+            else {
+                alert("Login Failed!");
+            }
+        };
+
+    </script>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="bodydiv">
+        <div class="login">
+
+            <div id="header">
+
+                <!-- Nav -->
+                <nav id="nav">
+                    <ul>
+                        <li><a href="main.html">Home</a></li>
+                        <li><a href="template.html">Design Templates</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                    <a href="main.html" id="logo"><img src="images/t.jpg" style=""></a>
+
+                </nav>
+            </div>
+
+        </div>
+
+        <br><!-- login form -->
+        <section class="login_form">
+            <h2 style="text-align: center; font-size:50px">LOGIN</h2>
+            <br><br>
+            <form onsubmit="func();return false;"><!-- user click submit -->
+                <div class="form-group">
+                    <label for="exampleInputID" class="label_font">ID</label>
+                    <input type="text" class="form-control" id="id" placeholder="Enter ID">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your ID with anyone
+                        else.</small>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="exampleInputPassword1" class="label_font">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <br>
+                <div class="col-12" style="text-align: center">
+                    <ul class="actions">
+                        <li><button type="submit" class="btn btn-primary" style="width:70px">Login</button></li>
+                        <li><a href="join.html"><button type="button" class="btn btn-primary"
+                                    style="width:70px">join</button></a></li>
+                    </ul>
+                </div>
+                <br>
+
+
+            </form>
+
+        </section>
+
+
+    </div>
+
+    <!--footer-->
+    <footer class="footer1 text-center">
+        <br>
+        <a href=""><img src="images/up.png"></a><br><br>
+
+        <br>
+        <p>1, Chungdae-ro, Seowon-gu, Cheongju-si, Chungcheongbuk-do, Republic of Korea</p>
+
+        <div id="map" class="map_style"></div><!-- google map-->
+
+        <br><br>
+        <div class="row" style="clear:both;">
+            <div class="col-sm-2">
+                <p class="text-center" style="font-size: 30px;"><strong>S P C M</strong></p><br>
+                <i>Smart Phone Case Mall</i>
+
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center"><strong style="font-size: 18px;">Contact</strong></p><br>
+                <p>H.P : 010-9897-0466</p>
+                <p>E-MAIL : syh0466@naver.com</p>
+                <p>H.P : 010-4008-2735</p>
+                <p>E-MAIL : gjwns95@naver.com</p>
+                <p>H.P : 010-6763-8757</p>
+                <p>E-MAIL : for94vi@naver.com</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center"><strong style="font-size: 18px;">developer</strong></p><br>
+                <p>2015041033 YuHeon Song</p>
+                <p>2015041050 JunSu Heo </p>
+                <p>2015041063 HaeJi Ahn </p>
+
+            </div>
+            <div class="col-sm-2">
+                <p class="text-center"><strong style="font-size: 18px;">IPHONE</strong></p><br>
+                <a href="" class="footer_a">Iphone 6</a><br>
+                <a href="" class="footer_a">Iphone 6 Plus</a><br>
+                <a href="" class="footer_a">Iphone 6S</a><br>
+                <a href="" class="footer_a">Iphone 6S Plus</a><br>
+                <a href="" class="footer_a">Iphone 7</a><br>
+                <a href="" class="footer_a">Iphone 7 Plus</a><br>
+                <a href="" class="footer_a">Iphone 8</a><br>
+                <a href="" class="footer_a">Iphone 8 Plus</a><br>
+                <a href="" class="footer_a">Iphone X</a><br>
+                <a href="" class="footer_a">Iphone XR</a><br>
+                <a href="" class="footer_a">Iphone XS</a><br>
+            </div>
+            <div class="col-sm-2">
+                <p class="text-center"><strong style="font-size: 18px;">GALAXY</strong></p><br>
+                <a href="" class="footer_a">Galaxy S7</a><br>
+                <a href="" class="footer_a">Galaxy S7 Edge</a><br>
+                <a href="" class="footer_a">Galaxy S8</a><br>
+                <a href="" class="footer_a">GALAXY S8 Plus</a><br>
+                <a href="" class="footer_a">Galaxy S9</a><br>
+                <a href="" class="footer_a">Galaxy S9 Plus</a><br>
+                <a href="" class="footer_a">Galaxy S10</a><br>
+                <a href="" class="footer_a">Galaxy S10E</a><br>
+                <a href="" class="footer_a">Galaxy S10 Plus</a><br>
+                <a href="" class="footer_a">Galaxy Note 8</a><br>
+                <a href="" class="footer_a">Galaxy Note 9</a><br>
+
+            </div>
+        </div>
+
+    </footer>
+
+
+
+    <script>
+        function myMap() {//google map
+            var mapCanvas = document.getElementById("map");
+            var myCenter = new google.maps.LatLng(36.625638, 127.454392);
+            var mapOptions = {
+                center: myCenter,
+                zoom: 15
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.BOUNCE
+            });
+            marker.setMap(map);
+        }
+    </script>
+
+    <script>
+        //Put Google map api key
+    </script>
+    <!--
+    To use this code on your website, get a free API key from Google.
+    Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+    -->
+
+</body>
+
+</html>

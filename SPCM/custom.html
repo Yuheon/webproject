@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Custom</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="./css/page_style.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Signika:300,400,600,700&display=swap&subset=latin-ext"
+        rel="stylesheet">
+    <script src="custom.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/fabric.js"></script>
+    <script src="jquery.minicolors.js"></script>
+    <link rel="stylesheet" href="jquery.minicolors.css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Amatic+SC|Anton|Lobster|Pacifico|Shadows+Into+Light|Teko&display=swap"
+        rel="stylesheet">
+    <style>
+
+    </style>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.demo').each(function () {
+                //
+                // Dear reader, it's actually very easy to initialize MiniColors. For example:
+                //
+                //  $(selector).minicolors();
+                //
+                // The way I've done it below is just for the demo, so don't get confused
+                // by it. Also, data- attributes aren't supported at this time. Again,
+                // they're only used for the purposes of this demo.
+                //
+                $(this).minicolors({
+                    control: $(this).attr('data-control') || 'hue',
+                    defaultValue: $(this).attr('data-defaultValue') || '',
+                    format: $(this).attr('data-format') || 'hex',
+                    keywords: $(this).attr('data-keywords') || '',
+                    inline: $(this).attr('data-inline') === 'true',
+                    letterCase: $(this).attr('data-letterCase') || 'lowercase',
+                    opacity: $(this).attr('data-opacity'),
+                    position: $(this).attr('data-position') || 'bottom',
+                    swatches: $(this).attr('data-swatches') ? $(this).attr('data-swatches').split('|') : [],
+                    change: function (hex, opacity) {
+                        var log;
+                        try {
+                            log = hex ? hex : 'transparent';
+                            if (opacity) log += ', ' + opacity;
+                            console.log(log);
+                        } catch (e) { }
+                    },
+                    theme: 'default'
+                });
+
+            });
+
+        });
+    </script>
+    <script>
+	
+        function logout() {
+            sessionStorage.setItem('logininfo', 0);
+            location.href = "main.html";
+        }
+		
+    </script>
+</head>
+
+<body>
+    <div class="bodydiv2">
+        <div class="login">
+
+            <div id="header">
+
+                <!-- Nav -->
+                <nav id="nav">
+                    <ul>
+                        <li><a href="main.html">Home</a></li>
+                        <li><a href="template.html">Design Templates</a></li>
+                        <li><a href="order_list.html"><img src="cart.png" width="17px" height="17px"></a></li>
+                        <li><a href="check_pw.html"><img src="user.png" width="17px" height="17px"></a></li>
+                        <li id='logout' style='cursor: pointer;color:white;' onclick='logout()'>LogOut</li>
+                    </ul>
+                    <a href="main.html" id="logo"><img src="images/t.jpg" style=""></a>
+                </nav>
+            </div>
+
+        </div>
+
+        <div>
+            <!--Custom section-->
+            <div id="select">
+                <br />
+                <img src="images/pencil.png" id="draw_img" style="width: 50px; height: 50px;" /><br /><br />
+                <div id="draw_option" style="display : none;">
+                    <br />
+                    <label for="drawing-mode-selector">Mode:</label>
+                    <select id="drawing-mode-selector">
+                        <option>Pencil</option>
+                        <option>Circle</option>
+                        <option>Spray</option>
+                        <option>Pattern</option>
+                    </select><br>
+
+                    <label for="drawing-line-width">Line width</label>
+                    <input type="range" value="0" min="0" max="150" id="drawing-line-width"><br />
+
+                    <label for="drawing-color">Line color:</label>
+                    <input type="color" value="black" id="drawing-color"><br />
+                </div>
+                <img src="images/text.png" id="text_img" style="width: 50px; height: 50px;" />
+                <input type="color" value="black" id="text_color">
+                <select id="text-font">
+                    <option>Times New roman</option>
+                    <option>Anton</option>
+                    <option>Teko</option>
+                    <option>Lobster</option>
+                    <option>Pacifico</option>
+                    <option>Shadows Into Light</option>
+                    <option>Amatic SC</option>
+                </select><br /><br /><br />
+                <img src="images/trash.png" id="delete_img" style="width: 50px; height: 50px;" /> <br /><br />
+                <br />
+                <input type="text" id="inline" class="demo" data-inline="true" value="#ffffff"><br /><br />
+
+                <input type="file" id="file" /><br />
+                <p id="product" style="font-size:25px;"></p>
+                <p id="price" style="font-size:25px;">Price : $11.99</p>
+                <script>
+                    input_product();
+                </script>
+                <div id="buy">
+                    <p>BUY</p>
+                </div>
+                <script>
+                    $('#buy').click(function () {
+                        var check = confirm('Are you sure BUY this design?');
+                        if (check) {
+                            array = {};
+                            array['product'] = $("#product").html();
+                            array['price'] = $("#price").html();
+                            sessionStorage.setItem("prodinfo", JSON.stringify(array));
+                            alert('Thank you :)')
+                            window.location.href = 'order.html';
+                        }
+                    });
+                </script>
+            </div>
+            <div id="make_phone">
+                <div id="canvas_section">
+                    <canvas id="canvas" width="370" height="770"
+                        style="border:0px solid #000000; margin: 0 auto;"></canvas>
+                </div>
+                <script>
+                    init_canavs();
+                    $("#draw_img").click(function () {
+                        if (canvas.isDrawingMode) {
+                            canvas.isDrawingMode = false;
+                            $('#draw_img').attr('src', 'images/pencil.png');
+                            document.getElementById("draw_option").style.display = "none";
+                        }
+                        else {
+                            canvas.isDrawingMode = true;
+                            $('#draw_img').attr("src", "images/cancel1.png");
+                            document.getElementById("draw_option").style.display = "block";
+
+                            $("#drawing-mode-selector").change(function () {
+                                canvas.freeDrawingBrush = new fabric[this.value + 'Brush'](canvas);
+                            });
+                            $("#drawing-line-width").change(function () {
+                                canvas.freeDrawingBrush.width = this.value;
+                            });
+                            $("#drawing-color").change(function () {
+                                canvas.freeDrawingBrush.color = this.value;
+                            });
+                        }
+                    });
+
+                    $("#delete_img").click(function () {
+                        canvas.remove(canvas.getActiveObject());
+                    });
+                    $('#text_img').click(function () {
+                        var t1 = new fabric.Textbox('text', {
+                            width: 200,
+                            height: 200,
+                            top: 5,
+                            left: 5,
+                            fontSize: 100,
+                            textAlign: 'center'
+                        });
+                        canvas.add(t1);
+                    });
+                    document.getElementById('file').addEventListener("change", function (e) {
+                        var file = e.target.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (f) {
+                            var data = f.target.result;
+                            fabric.Image.fromURL(data, function (img) {
+                                var oImg = img.set({ left: 0, top: 0, angle: 00, opacity: 1 }).scale(0.9);
+                                canvas.add(oImg).renderAll();
+                                var a = canvas.setActiveObject(oImg);
+                                var dataURL = canvas.toDataURL({ format: 'png', quality: 0.8 });
+                            });
+                        };
+                        reader.readAsDataURL(file);
+                    });
+
+                    $('#text_color').change(function () {
+                        canvas.getActiveObject().set("fill", this.value);
+                    });
+                    $('#text-font').change(function () {
+                        canvas.getActiveObject().set("fontFamily", this.value);
+                    });
+
+                </script>
+            </div>
+            <div id="temp"></div>
+        </div>
+
+    </div>
+
+    <!--영어로 바꿀 예정-->
+    <footer class="footer1 text-center">
+        <br>
+        <a href=""><img src="images/up.png"></a><br><br>
+
+        <br>
+        <p>1, Chungdae-ro, Seowon-gu, Cheongju-si, Chungcheongbuk-do, Republic of Korea</p>
+
+        <div id="map" class="map_style"></div>
+
+        <br><br>
+        <div class="row" style="clear:both;">
+            <div class="col-sm-2">
+                <p class="text-center" style="font-size: 30px;"><strong>S P C M</strong></p><br>
+                <i>Smart Phone Case Mall</i>
+
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center"><strong style="font-size: 18px;">Contact</strong></p><br>
+                <p>H.P : 010-9897-0466</p>
+                <p>E-MAIL : syh0466@naver.com</p>
+                <p>H.P : 010-4008-2735</p>
+                <p>E-MAIL : gjwns95@naver.com</p>
+                <p>H.P : 010-6763-8757</p>
+                <p>E-MAIL : for94vi@naver.com</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center"><strong style="font-size: 18px;">developer</strong></p><br>
+                <p>2015041033 YuHeon Song</p>
+                <p>2015041050 JunSu Heo </p>
+                <p>2015041063 HaeJi Ahn </p>
+
+            </div>
+            <div class="col-sm-2">
+                <p class="text-center"><strong style="font-size: 18px;">IPHONE</strong></p><br>
+                <a href="" class="footer_a">Iphone 6</a><br>
+                <a href="" class="footer_a">Iphone 6 Plus</a><br>
+                <a href="" class="footer_a">Iphone 6S</a><br>
+                <a href="" class="footer_a">Iphone 6S Plus</a><br>
+                <a href="" class="footer_a">Iphone 7</a><br>
+                <a href="" class="footer_a">Iphone 7 Plus</a><br>
+                <a href="" class="footer_a">Iphone 8</a><br>
+                <a href="" class="footer_a">Iphone 8 Plus</a><br>
+                <a href="" class="footer_a">Iphone X</a><br>
+                <a href="" class="footer_a">Iphone XR</a><br>
+                <a href="" class="footer_a">Iphone XS</a><br>
+            </div>
+            <div class="col-sm-2">
+                <p class="text-center"><strong style="font-size: 18px;">GALAXY</strong></p><br>
+                <a href="" class="footer_a">Galaxy S7</a><br>
+                <a href="" class="footer_a">Galaxy S7 Edge</a><br>
+                <a href="" class="footer_a">Galaxy S8</a><br>
+                <a href="" class="footer_a">GALAXY S8 Plus</a><br>
+                <a href="" class="footer_a">Galaxy S9</a><br>
+                <a href="" class="footer_a">Galaxy S9 Plus</a><br>
+                <a href="" class="footer_a">Galaxy S10</a><br>
+                <a href="" class="footer_a">Galaxy S10E</a><br>
+                <a href="" class="footer_a">Galaxy S10 Plus</a><br>
+                <a href="" class="footer_a">Galaxy Note 8</a><br>
+                <a href="" class="footer_a">Galaxy Note 9</a><br>
+
+            </div>
+        </div>
+
+    </footer>
+
+
+
+    <script>
+        function myMap() {
+            var mapCanvas = document.getElementById("map");
+            var myCenter = new google.maps.LatLng(36.625638, 127.454392);
+            var mapOptions = {
+                center: myCenter,
+                zoom: 15
+            };
+            var map = new google.maps.Map(mapCanvas, mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myCenter,
+                animation: google.maps.Animation.BOUNCE
+            });
+            marker.setMap(map);
+        }
+    </script>
+
+    <script>
+        //Put Google map api key
+    </script>
+    <!--
+    To use this code on your website, get a free API key from Google.
+    Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
+    -->
+
+</body>
+
+</html>
